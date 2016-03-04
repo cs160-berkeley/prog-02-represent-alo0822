@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear_round"
+    android:background="@color/blue">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/top_bg"
+        android:background="@color/red"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/top_bg"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:paddingBottom="3dp"
+        android:text="2012 Presidential Vote"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:background="@color/white"
+        android:layout_below="@+id/top_bg"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/county"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="15sp"
+                android:textColor="@color/title"
+                android:text="Coming soon"/>
+
+            <TextView
+                android:id="@+id/obama_votes"
+                android:layout_below="@+id/county"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/text"
+                android:text="Coming soon"/>
+
+            <TextView
+                android:id="@+id/romney_votes"
+                android:layout_below="@+id/obama_votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/text"
+                android:text="Coming soon"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
