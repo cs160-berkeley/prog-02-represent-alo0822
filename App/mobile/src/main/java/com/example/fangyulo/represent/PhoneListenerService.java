@@ -53,11 +53,6 @@ public class PhoneListenerService extends WearableListenerService {
             intent.putExtra("zip_code", value);
             Log.d("T", "put extra");
             context.startActivity(intent);
-//            Context context = getApplicationContext();
-//            int duration = Toast.LENGTH_SHORT;
-//
-//            Toast toast = Toast.makeText(context, value, duration);
-//            toast.show();
 
         } else {
             super.onMessageReceived( messageEvent );

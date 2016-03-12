@@ -82,7 +82,6 @@ public class WatchToPhoneService extends Service {
             }).start();
         }
 
-
         return START_STICKY;
     }
 

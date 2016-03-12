@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,7 +45,7 @@ public class DetailsView extends Activity {
         window.setStatusBarColor(DetailsView.this.getResources().getColor(R.color.blue));
 
         RepsData rd = (RepsData) getApplicationContext();
-        String passed_name = "Barbara Lee";
+        String passed_name = null;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             passed_name = extras.getString("rep_name");
@@ -55,9 +56,16 @@ public class DetailsView extends Activity {
         TextView party = (TextView) findViewById(R.id.det_party);
         TextView end_date = (TextView) findViewById(R.id.end_date);
         name.setText(passed_name);
+        Button back_button = (Button) findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         RepsInfo rep = rd.getRepByName(passed_name);
-        image.setImageResource(rep.get_img());
+        image.setImageDrawable(rep.get_photo());
         commArr.addAll(Arrays.asList(rep.get_comms()));
         billsArr.addAll(Arrays.asList(rep.get_bills()));
         datesArr.addAll(Arrays.asList(rep.get_dates()));

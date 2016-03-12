@@ -3,6 +3,8 @@
     package="com.example.fangyulo.represent">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="com.example.fangyulo.represent.RepsData"
@@ -23,7 +25,7 @@
             android:label="@string/title_activity_reps" />
         <activity
             android:name=".DetailsView"
-            android:label="@string/title_activity_details_view"></activity>
+            android:label="@string/title_activity_details_view"/>
         <service android:name=".PhoneToWatchService" />
          <!--Listeners are special services that need to be declared like below, as BIND_LISTENER -->
         <service android:name=".PhoneListenerService"
@@ -32,6 +34,10 @@
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ec3a6508ecfafc8a4775c2cdb86b9d57c8ce5e6b"
+            />
     </application>
 
 </manifest>

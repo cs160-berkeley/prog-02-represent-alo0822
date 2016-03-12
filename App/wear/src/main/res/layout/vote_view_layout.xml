@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:fontFamily="sans-serif-medium"
-        android:paddingBottom="3dp"
+        android:paddingBottom="5dp"
         android:text="2012 Presidential Vote"/>
 
     <RelativeLayout
@@ -41,22 +41,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:paddingBottom="15dp"
                 android:fontFamily="sans-serif-medium"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textColor="@color/title"
-                android:text="Coming soon"/>
+                android:text="County"/>
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_below="@+id/county"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="12dp"
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"
+                android:textColor="@color/title"
+                android:text="State"/>
 
             <TextView
                 android:id="@+id/obama_votes"
-                android:layout_below="@+id/county"
+                android:layout_below="@+id/state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif"
+                android:textSize="13sp"
                 android:textColor="@color/text"
-                android:text="Coming soon"/>
+                android:text="%"/>
 
             <TextView
                 android:id="@+id/romney_votes"
@@ -65,8 +77,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif"
+                android:textSize="13sp"
                 android:textColor="@color/text"
-                android:text="Coming soon"/>
+                android:text="%"/>
 
         </RelativeLayout>
 

@@ -62,7 +62,7 @@
                         android:paddingLeft="5dp"
                         android:textSize="14sp"
                         android:hint="Enter zip code"
-                        android:lines="1"
+                        android:singleLine="true"
                         android:textColorHint="@color/hint"
                         android:textColor="@color/text">
                     </EditText>
@@ -72,6 +72,31 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/noreps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/hint"
+        android:padding="16dp"
+        android:text="No representatives found for this zip code."
+        android:visibility="gone"
+        android:gravity="center"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardList"

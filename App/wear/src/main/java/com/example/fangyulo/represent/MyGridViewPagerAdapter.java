@@ -10,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by fangyulo on 3/2/16.
@@ -21,36 +24,61 @@ public class MyGridViewPagerAdapter extends GridPagerAdapter {
 
     private int row;
     private int col;
-    private int vote_row;
-    String[] data;
+    private ArrayList<Integer> vote_row = new ArrayList<>();
+    ArrayList<String[]> data;
     private String zip;
+    private String county;
+    private String state;
+    private String obama;
+    private String romney;
     View gridView;
 
-    public MyGridViewPagerAdapter (int row, int col, String data) {
+    public MyGridViewPagerAdapter (int row, int col, String[] data) {
         super();
         this.row = row;
         this.col = col;
-        this.zip = data;
         parseData(data);
     }
 
-    private void parseData(String data) {
-        String[] str = data.split(", ");
-        this.zip = str[str.length-1];
+    private void parseData(String[] str) {
+//        String[] str = data.split(", ");
+
+        String vote_info = str[str.length - 1];
+        String [] vote = vote_info.split("/");
+        if (vote.length > 2) {
+            this.county = vote[0];
+            this.state = vote[1];
+            this.obama = "Obama: " + vote[2] + "%";
+            this.romney = "Romney: " + vote[3] + "%";
+        } else {
+            this.state = "Currently unavailable.";
+        }
+
+        this.zip = str[str.length - 2];
         System.out.println("this.zip: " + this.zip);
-        this.data = new String[3];
-        for (int i = 0; i < str.length-1; i++) {
-            this.data[i] = str[i];
-            if (!str[i].equals("Barbara Boxer") && !str[i].equals("Dianne Feinstein")){
-                vote_row = i;
+        this.data = new ArrayList<>();
+        for (int i = 0; i < str.length-2; i+=4) {
+            String [] rep = new String[4];
+            rep[0] = str[i]; //name
+            rep[1] = str[i+1]; //party
+            rep[2] = str[i+2]; //chamber
+            rep[3] = str[i+3]; //img
+            System.out.println(rep[0] + ", " + rep[1] + ", " + rep[2] + ", " + rep[3]);
+            this.data.add(rep);
+
+            if (str[i+2].equals("house")){
+                vote_row.add((int)i/3);
             }
         }
+
     }
 
     @Override
     public int getColumnCount(int row) {
-        if (row == vote_row)
+        if (vote_row.contains(row)) {
+            System.out.println("getting vote_row col");
             return this.col + 1;
+        }
         else
             return this.col;
     }
@@ -63,7 +91,8 @@ public class MyGridViewPagerAdapter extends GridPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int row, int col) {
         if (col == 0) {
-            final View view = LayoutInflater.from(container.getContext()).inflate(R.layout.grid_view_pager_item, container, false);
+//            final View view = LayoutInflater.from(container.getContext()).inflate(R.layout.grid_view_pager_item, container, false);
+            final View view = LayoutInflater.from(container.getContext()).inflate(R.layout.grid_view_pager_item_noimg, container, false);
             setUpReps(view, container, row, col);
             container.addView(view);
             gridView = view;
@@ -86,7 +115,7 @@ public class MyGridViewPagerAdapter extends GridPagerAdapter {
 
             return view;
         }
-        else if (row == vote_row) {
+        else if (vote_row.contains(row)) {
             final View view = LayoutInflater.from(container.getContext()).inflate(R.layout.vote_view_layout, container, false);
             setUpReps(view, container, row, col);
             container.addView(view);
@@ -97,52 +126,35 @@ public class MyGridViewPagerAdapter extends GridPagerAdapter {
 
     private void setUpReps(View view, ViewGroup container, int row, int col) {
 
+        System.out.println("Setting up: " + row + ", " + col);
         if (col == 0) {
-            ImageView img = (ImageView) view.findViewById(R.id.rep_photo);
+            TextView title = (TextView) view.findViewById(R.id.rep_title);
             TextView name = (TextView) view.findViewById(R.id.rep_name);
             TextView party = (TextView) view.findViewById(R.id.rep_party);
 
-            name.setText(this.data[row]);
-            party.setText("Democrat");
-
-            if (this.data[row].equals("Barbara Lee")) {
-                img.setImageResource(R.drawable.barbaralee_resize);
-            } else if (this.data[row].equals("Barbara Boxer")) {
-                img.setImageResource(R.drawable.barbaraboxer_resize);
-            } else if (this.data[row].equals("Dianne Feinstein")) {
-                img.setImageResource(R.drawable.dianefeinstein_resize);
-            } else if (this.data[row].equals("Nancy Pelosi")) {
-                img.setImageResource(R.drawable.nancypelosi_resize);
-            } else if (this.data[row].equals("Loretta Sanchez")) {
-                img.setImageResource(R.drawable.lorettasanches_resize);
-            }
+            System.out.println("Setting up rep " + this.data.get(row)[0]);
+            String chamber = this.data.get(row)[2];
+            if (chamber.equals("senate"))
+                title.setText("Senator");
+            else
+                title.setText("Representative");
+            name.setText(this.data.get(row)[0]);
+            party.setText(this.data.get(row)[1]);
 
         } else if (col == 1) {
-//        }
-//        if (col == 1) {
+            System.out.println("col == 1");
+
             TextView county = (TextView) view.findViewById(R.id.county);
+            TextView state = (TextView) view.findViewById(R.id.state);
             TextView obama = (TextView) view.findViewById(R.id.obama_votes);
             TextView romney = (TextView) view.findViewById(R.id.romney_votes);
 
-            if (this.zip.equals("94704")) {
-                county.setText("Alameda, CA");
-                obama.setText("Obama: 78.7%");
-                romney.setText("Romney: 18.4%");
-            } else if (this.zip.equals("94103")) {
-                county.setText("San Francisco, CA");
-                obama.setText("Obama: 83.5%");
-                romney.setText("Romney: 13.0%");
-            } else {
-                county.setText("Anaheim, CA");
-                obama.setText("Obama: 85.5%");
-                romney.setText("Romney: 12.5%");
-            }
+            county.setText(this.county);
+            state.setText(this.state);
+            obama.setText(this.obama);
+            romney.setText(this.romney);
 
         }
-
-    }
-
-    private void setUpVoteView(View view, int row, int col) {
 
     }
 

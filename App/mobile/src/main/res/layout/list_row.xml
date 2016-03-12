@@ -2,7 +2,8 @@
     android:id="@+id/row_title"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:padding="7dp"
+    android:lineSpacingMultiplier="1.2"
     android:textColor="@color/title"
     android:textSize="14sp" >
 </TextView>  
