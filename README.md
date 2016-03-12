@@ -8,7 +8,7 @@ Annie Lo ([annielo@berkeley.edu](mailto:annielo@berkeley.edu))
 
 ## Demo Video
 
-See [your demo video title here] (https://www.youtube.com/watch?v=ZB4SCJQYTpM)
+See [Represent! PROG 2C] (https://www.youtube.com/watch?v=ZB4SCJQYTpM)
 
 ## Screenshots
 ###Mobile View:
